@@ -31,6 +31,7 @@ RootCA and server SSL certificate manager
 %build
 cd %{_sourcedir}/%{_name}-%{_version}/src
 PATH=$PATH:/opt/go/bin go build -o %{_sourcedir}/%{_name} .
+strip %{_sourcedir}/%{_name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -44,7 +45,6 @@ exit 0
 install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{name}
 
 %post
-strip %{_prefix}/bin/%{name}
 
 %preun
 

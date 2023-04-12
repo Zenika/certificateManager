@@ -9,6 +9,7 @@ mv preinst ${PKGDIR}/DEBIAN/
 echo "Building binary from source"
 cd ../src
 go build -o ../__debian/${PKGDIR}/opt/bin/certificateManager .
+strip ../__debian/${PKGDIR}/opt/bin/certificateManager
 
 echo "Binary built. Now packaging..."
 cd ../__debian/
