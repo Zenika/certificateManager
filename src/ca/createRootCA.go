@@ -8,8 +8,8 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"math/big"
-	"net"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -27,7 +27,7 @@ The function generates a new RSA private key
 
 func createCACert(caconfig *configs.RootCAconfig) error {
 	// Generate a new private key for the CA
-	privateKey, err := rsa.GenerateKey(rand.Reader, 2048)
+	privateKey, err := rsa.GenerateKey(rand.Reader, 4096)
 	if err != nil {
 		return err
 	}
@@ -35,14 +35,15 @@ func createCACert(caconfig *configs.RootCAconfig) error {
 	// Create a new self-signed root certificate template
 	template := &x509.Certificate{
 		SerialNumber:          big.NewInt(1),
-		Subject:               pkix.Name{CommonName: caconfig.CommonName},
+		Subject:               pkix.Name{CommonName: caconfig.CommonName, Locality: []string{caconfig.Locality}, Country: []string{caconfig.Country}, Organization: []string{caconfig.Organization}, OrganizationalUnit: []string{caconfig.OrganizationalUnit}, Province: []string{caconfig.Province}},
 		NotBefore:             time.Now(),
-		NotAfter:              time.Now().AddDate(caconfig.ValidForYears, 0, 0),
-		KeyUsage:              x509.KeyUsageCertSign | x509.KeyUsageCRLSign,
+		NotAfter:              time.Now().AddDate(caconfig.Duration, 0, 0),
+		KeyUsage:              x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature,
 		IsCA:                  true,
 		BasicConstraintsValid: true,
-		DNSNames:              caconfig.DNSNames,
-		IPAddresses:           caconfig.IPAddresses,
+		DNSNames:              caconfig.DNS,
+		IPAddresses:           caconfig.IPS,
+		EmailAddresses:        []string{"certs@famillegratton.net", "jfgratton@famillegratton.net"},
 	}
 
 	// Create the root certificate using the template and the private key
@@ -52,7 +53,7 @@ func createCACert(caconfig *configs.RootCAconfig) error {
 	}
 
 	// Write the private key and root certificate to files
-	privateKeyFile, err := os.Create(caconfig.KeyFilePath)
+	privateKeyFile, err := os.Create(filepath.Join(caconfig.CertificateDirectory, caconfig.CertificateName+".key"))
 	if err != nil {
 		return err
 	}
@@ -63,7 +64,7 @@ func createCACert(caconfig *configs.RootCAconfig) error {
 		return err
 	}
 
-	rootCertFile, err := os.Create(caconfig.CertFilePath)
+	rootCertFile, err := os.Create(filepath.Join(caconfig.CertificateDirectory, caconfig.CertificateName+".crt"))
 	if err != nil {
 		return err
 	}
@@ -77,15 +78,20 @@ func createCACert(caconfig *configs.RootCAconfig) error {
 	return nil
 }
 
-func main() {
+func CreateRootCA() {
 	// Example usage
 	config := &configs.RootCAconfig{
-		CommonName:    "My Root CA",
-		ValidForYears: 10,
-		DNSNames:      []string{"example.com", "www.example.com"},
-		IPAddresses:   []net.IP{net.ParseIP("127.0.0.1")},
-		KeyFilePath:   "/path/to/root.key",
-		CertFilePath:  "/path/to/root.crt",
+		CommonName:         "Famille Gratton",
+		Country:            "CA",
+		Province:           "Quebec",
+		Locality:           "Blainville",
+		Organization:       "famillegratton.net",
+		OrganizationalUnit: "famillegratton",
+		Duration:           10,
+		//DNSNames:      []string{"famillegratton.net", "nas.famillegratton.net", "lan.famillegratton.net"},
+		//IPAddresses:  []net.IP{},
+		CertificateDirectory: "/tmp/",
+		CertificateName:      "rootCA",
 	}
 	err := createCACert(config)
 	if err != nil {

@@ -4,6 +4,7 @@
 package cmd
 
 import (
+	"certificateManager/configs"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -32,16 +33,8 @@ func Execute() {
 }
 
 func init() {
-	//cobra.OnInitialize(initConfig)
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	//rootCmd.PersistentFlags().BoolVarP(&misc.PlainOutput, "plain", "P", false, "Tables are shown with less decorations")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.PersistentFlags().StringVarP(&configs.RCAenvironment, "caenv", "cae", "rootCA-default.json", "Root CA configuration file.")
+	rootCmd.PersistentFlags().StringVarP(&configs.ServerCertEnvironment, "scenv", "sce", "serverCert-default.json", "Server certificates configuration file.")
 }
 
 //func initConfig() {
