@@ -80,4 +80,4 @@ The following files and directories are of no use to you, yet :<br>
 - ./certificateManager.spec<br>
 - ./PACKAGING.md<br><br>
 
-Those files are used for my own internal docker-based build system. Until I manage to "anonymize" those docker containers, I'm not publishing their code, yet.
+Those files are used for my own internal docker-based packaging system. Until I manage to "anonymize" those docker containers, I'm not publishing their code, yet.
