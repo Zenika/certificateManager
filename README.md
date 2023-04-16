@@ -1,5 +1,4 @@
 <H1>certificateManager</H1>
-___
 
 Tool to manage your own certificates<br><br>
 
