@@ -4,6 +4,7 @@ Copyright © 2022 Jean-Francois Gratton <jean-francois@famillegratton.net>
 package cmd
 
 import (
+	"certificateManager/ca"
 	"fmt"
 	"os"
 
@@ -36,9 +37,19 @@ var caConfigCmd = &cobra.Command{
 	},
 }
 
+var caCreateCmd = &cobra.Command{
+	Use:   "create",
+	Short: "rootCA creation command",
+	//Long:    `This is where you will manage (add/remove) your rootCAs\' configs files.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		ca.CreateRootCA()
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(caCmd)
 	caCmd.AddCommand(caConfigCmd)
+	caCmd.AddCommand(caCreateCmd)
 
 	// Here you will define your flags and configuration settings.
 
