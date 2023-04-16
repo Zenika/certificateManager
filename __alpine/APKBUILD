@@ -2,7 +2,7 @@
 # PACKAGER: APK Builder <builder@famillegratton.net>
 pkgname=certificateManager
 pkgver=0.100
-pkgrel=1
+pkgrel=0
 pkgdir=/data/packages
 builddir="$startdir/src/BUILD"
 pkgdesc="Certificate Manage to create root CAs and server certificates"

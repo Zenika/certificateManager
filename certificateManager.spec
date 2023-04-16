@@ -3,7 +3,7 @@
 %define _name   certificateManager
 %define _prefix /opt
 %define _version 0.100
-%define _rel 1
+%define _rel 0
 %define _arch x86_64
 
 Name:       dtools
