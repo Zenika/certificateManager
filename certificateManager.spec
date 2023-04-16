@@ -6,10 +6,10 @@
 %define _rel 0
 %define _arch x86_64
 
-Name:       dtools
+Name:       certificateManager
 Version:    %{_version}
 Release:    %{_rel}
-Summary:    dtools
+Summary:    certificateManager
 
 Group:      SSL
 License:    GPL2.0
