@@ -73,11 +73,11 @@ Assuming you have a config file named `server.json` :<br>
 As a matter of fact, this software uses GO's COBRA-CLI framework, a very arg parser commonly used by Docker, Kubernetes, Terraform. You can get help from many, if not all commands.
 
 <H1>An important note about the packaging directories</H1>
-The following files and directories are of no use to you, yet :
-- __alpine/
-- __debian/
-- ./rpm-install-build-deps.sh
-- ./certificateManager.spec
-- ./PACKAGING.md
+The following files and directories are of no use to you, yet :<br>
+- __alpine/<br>
+- __debian/<br>
+- ./rpm-install-build-deps.sh<br>
+- ./certificateManager.spec<br>
+- ./PACKAGING.md<br><br>
 
 Those files are used for my own internal docker-based build system. Until I manage to "anonymize" those docker containers, I'm not publishing their code, yet.
