@@ -12,7 +12,7 @@ With this tool you will be able to:
 
 <H2>Installing from source</H2>
 <H3>Pre-requisites:</H3>
-You need the following packages and tools:
+You need the following packages and tools:<br>
 - gcc<br>
 - make<br>
 - go : check the `go.version` file to see which version to install; as of writing this, v1.20.3 was the current version.<br>
