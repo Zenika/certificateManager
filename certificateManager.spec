@@ -56,6 +56,9 @@ install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
+* Sun Apr 16 2023 builder <builder@famillegratton.net> 0.101-0
+- Version bump and fixes (jean-francois@famillegratton.net)
+
 * Sun Apr 16 2023 builder <builder@famillegratton.net> 0.100-0
 - Initial dry-run on packaging
 
