@@ -5,11 +5,12 @@ package cmd
 
 import (
 	"certificateManager/configs"
+	"certificateManager/misc"
 	"github.com/spf13/cobra"
 	"os"
 )
 
-var version = "0.100 (2023.03.20)"
+var version = "0.101 (2023.03.20)"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -20,6 +21,15 @@ var rootCmd = &cobra.Command{
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
+}
+
+var clCmd = &cobra.Command{
+	Use:     "changelog",
+	Aliases: []string{"cl"},
+	Short:   "Shows changelog",
+	Run: func(cmd *cobra.Command, args []string) {
+		misc.Changelog()
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -33,8 +43,9 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVarP(&configs.RCAenvironment, "caenv", "cae", "rootCA-default.json", "Root CA configuration file.")
-	rootCmd.PersistentFlags().StringVarP(&configs.ServerCertEnvironment, "scenv", "sce", "serverCert-default.json", "Server certificates configuration file.")
+	rootCmd.AddCommand(clCmd)
+	rootCmd.PersistentFlags().StringVarP(&configs.RCAenvironment, "caenv", "c", "rootCA-default.json", "Root CA configuration file.")
+	rootCmd.PersistentFlags().StringVarP(&configs.ServerCertEnvironment, "scenv", "s", "serverCert-default.json", "Server certificates configuration file.")
 }
 
 //func initConfig() {
