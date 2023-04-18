@@ -68,7 +68,7 @@ func VerifyCACertificate(certFilePath string) error {
 
 	// Print X509v3 Key Usage information
 	if parsedCert.KeyUsage != 0 {
-		fmt.Printf("    X509v3 Key Usage: %s\n", parsedCert.KeyUsage)
+		fmt.Printf("    X509v3 Key Usage: %v\n", parsedCert.KeyUsage)
 	}
 
 	// Print X509v3 Basic Constraints information

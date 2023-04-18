@@ -1,6 +1,6 @@
-/*
-Copyright © 2022 Jean-Francois Gratton <jean-francois@famillegratton.net>
-*/
+// certificateManager : Écrit par Jean-François Gratton (jean-francois@famillegratton.net)
+// src/cmd/caCommands.go
+
 package cmd
 
 import (
@@ -61,15 +61,5 @@ func init() {
 	caCmd.AddCommand(caCreateCmd)
 	caCmd.AddCommand(caVerifyCmd)
 
-	caVerifyCmd.PersistentFlags().BoolVarP(&ca.CaVerifyVerbose, "verbose", "v", false, "Display the full output")
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// caCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// caCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	caVerifyCmd.Flags().BoolVarP(&ca.CaVerifyVerbose, "verbose", "v", false, "Display the full output")
 }

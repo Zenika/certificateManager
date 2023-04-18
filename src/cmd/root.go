@@ -1,6 +1,6 @@
-/*
-©2023 J.F.Gratton (jean-francois@famillegratton.net)
-*/
+// certificateManager : Écrit par Jean-François Gratton (jean-francois@famillegratton.net)
+// src/cmd/root.go
+
 package cmd
 
 import (
@@ -18,9 +18,6 @@ var rootCmd = &cobra.Command{
 	Short:   "A rootCA and server certificates management tool",
 	Version: version,
 	Long:    `This tools allows you to manipulate your custom root CAs and all certificates signed against that rootCA.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
 var clCmd = &cobra.Command{
@@ -32,8 +29,6 @@ var clCmd = &cobra.Command{
 	},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
@@ -46,10 +41,3 @@ func init() {
 	rootCmd.AddCommand(clCmd)
 	rootCmd.PersistentFlags().StringVarP(&configs.CertConfigFile, "config", "c", "rootCA-default.json", "Root CA configuration file.")
 }
-
-//func initConfig() {
-//	//hosts.ConnectURI, _ = rootCmd.Flags().GetString("remotehost")
-//	if !strings.Contains(hosts.ConnectURI, ":") {
-//		hosts.ConnectURI += ":2375"
-//	}
-//}
