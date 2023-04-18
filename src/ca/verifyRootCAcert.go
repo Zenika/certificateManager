@@ -11,6 +11,8 @@ import (
 	"os"
 )
 
+var CaVerifyVerbose = false
+
 func VerifyCACertificate(certFilePath string) error {
 	// Read the certificate file
 	certPEMBlock, err := os.ReadFile(certFilePath)
@@ -32,18 +34,24 @@ func VerifyCACertificate(certFilePath string) error {
 
 	// Print certificate information
 	fmt.Printf("Certificate:\n")
-	fmt.Printf("    Data:\n%s\n", string(certPEMBlock))
+	if CaVerifyVerbose {
+		fmt.Printf("    Data:\n%s\n", string(certPEMBlock))
+	}
 	fmt.Printf("    Subject: %v\n", parsedCert.Subject)
 	fmt.Printf("    Issuer: %v\n", parsedCert.Issuer)
 	fmt.Printf("    Serial Number: %v\n", parsedCert.SerialNumber)
 	fmt.Printf("    Not Before: %v\n", parsedCert.NotBefore)
 	fmt.Printf("    Not After : %v\n", parsedCert.NotAfter)
-	fmt.Printf("    DNS Names : %v\n", parsedCert.DNSNames)
-	fmt.Printf("    Email Addresses : %v\n", parsedCert.EmailAddresses)
-	fmt.Printf("    IP Addresses : %v\n", parsedCert.IPAddresses)
-	fmt.Printf("    URIs : %v\n", parsedCert.URIs)
+	//fmt.Printf("    DNS Names : %v\n", parsedCert.DNSNames)
+	//fmt.Printf("    Email Addresses : %v\n", parsedCert.EmailAddresses)
+	//fmt.Printf("    IP Addresses : %v\n", parsedCert.IPAddresses)
+	if len(parsedCert.URIs) > 0 {
+		fmt.Printf("    URIs : %v\n", parsedCert.URIs)
+	}
 	fmt.Printf("    Signature Algorithm: %v\n", parsedCert.SignatureAlgorithm)
-	fmt.Printf("    Signature: %v\n", parsedCert.Signature)
+	if CaVerifyVerbose {
+		fmt.Printf("    Signature: %v\n", parsedCert.Signature)
+	}
 
 	// Print X509v3 Key Usage information
 	if parsedCert.KeyUsage != 0 {
@@ -53,27 +61,30 @@ func VerifyCACertificate(certFilePath string) error {
 	// Print X509v3 Basic Constraints information
 	if parsedCert.BasicConstraintsValid {
 		if parsedCert.IsCA {
-			fmt.Printf("    X509v3 Basic Constraints: CA:TRUE\n")
+			fmt.Printf("    X509v3 Basic Constraints:\n\tIs CA: true\n")
 		} else {
-			fmt.Printf("    X509v3 Basic Constraints: CA:FALSE\n")
+			fmt.Printf("    X509v3 Basic Constraints:\n\tIs CA: false\n")
 		}
 	}
 
 	// Print X509v3 Subject Alternative Name information
 	if len(parsedCert.DNSNames) > 0 {
-		fmt.Printf("    X509v3 Subject Alternative Name:\n")
+		fmt.Printf("    X509v3 Subject Alternative Name(s):\n")
+		fmt.Println("        DNS:")
 		for _, dns := range parsedCert.DNSNames {
-			fmt.Printf("        DNS:%s\n", dns)
+			fmt.Printf("        \t- %s\n", dns)
 		}
 	}
 	if len(parsedCert.IPAddresses) > 0 {
+		fmt.Println("        IP Address(es):")
 		for _, ipa := range parsedCert.IPAddresses {
-			fmt.Printf("        IP Addresses:%s\n", ipa)
+			fmt.Printf("        \t- %s\n", ipa)
 		}
 	}
 	if len(parsedCert.EmailAddresses) > 0 {
+		fmt.Println("        Email Address(es):")
 		for _, email := range parsedCert.EmailAddresses {
-			fmt.Printf("        Email Addresses:%s\n", email)
+			fmt.Printf("        \t- %s\n", email)
 		}
 	}
 

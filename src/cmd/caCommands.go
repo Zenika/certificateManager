@@ -61,6 +61,8 @@ func init() {
 	caCmd.AddCommand(caCreateCmd)
 	caCmd.AddCommand(caVerifyCmd)
 
+	caVerifyCmd.PersistentFlags().BoolVarP(&ca.CaVerifyVerbose, "verbose", "v", false, "Display the full output")
+
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

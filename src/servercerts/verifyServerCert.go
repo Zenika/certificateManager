@@ -11,6 +11,8 @@ import (
 	"os"
 )
 
+var CaVerifyVerbose = false
+
 func verifyCertificate(certFilePath string) error {
 	// Read the certificate file
 	certPEMBlock, err := os.ReadFile(certFilePath)
