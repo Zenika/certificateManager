@@ -13,7 +13,7 @@ import (
 var configCmd = &cobra.Command{
 	Use:   "configs",
 	Short: "Configuration file management",
-	Long:  `This is where you can create a templated file, edit/delete an existing file, etc.`,
+	Long:  `This is where you can create a templated file, edit/delete an existing config file, etc.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("configs called")
 	},

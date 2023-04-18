@@ -7,6 +7,7 @@ import (
 	"certificateManager/ca"
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
@@ -24,25 +25,22 @@ var caCmd = &cobra.Command{
 	},
 }
 
-var caConfigCmd = &cobra.Command{
-	Use:     "configs",
-	Aliases: []string{"cfg", "conf"},
-	Short:   "rootCA configs file management",
-	Long:    `This is where you will manage (add/remove) your rootCAs\' configs files.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) < 1 {
-			fmt.Println("Not enough parameters")
-			os.Exit(0)
-		}
-	},
-}
-
 var caCreateCmd = &cobra.Command{
 	Use:   "create",
 	Short: "rootCA creation command",
 	//Long:    `This is where you will manage (add/remove) your rootCAs\' configs files.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		ca.CreateRootCA()
+		var nBytes = 0
+		if len(args) == 0 {
+			nBytes = 4096
+		} else {
+			nBytes, _ = strconv.Atoi(args[0])
+		}
+		err := ca.CreateRootCA(nBytes)
+		if err != nil {
+			fmt.Println("Error while creating the root CA:")
+			fmt.Println(err)
+		}
 	},
 }
 
@@ -57,7 +55,6 @@ var caVerifyCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(caCmd)
-	caCmd.AddCommand(caConfigCmd)
 	caCmd.AddCommand(caCreateCmd)
 	caCmd.AddCommand(caVerifyCmd)
 

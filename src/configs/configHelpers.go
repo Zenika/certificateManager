@@ -13,7 +13,7 @@ import (
 var CertConfigFile = "rootCA-default.json"
 var ServerCertEnvironment = "serverCert-default.json"
 
-func Json2creds() CertConfigStruct {
+func Json2Config() CertConfigStruct {
 	var payload CertConfigStruct
 	rcDir, _ := os.UserHomeDir()
 	rcFile := rcDir + "/.config/certificatemanager/" + CertConfigFile

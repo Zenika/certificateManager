@@ -3,7 +3,7 @@ all:
 	go build . -o ./certificateManager.exe
 
 prepare:
-	sudo /opt/bin/install_golang.sh 1.19.7 amd64
+	sudo /opt/bin/install_golang.sh 1.19.8 amd64
 	sudo apk update
 
 install:
