@@ -4,8 +4,26 @@
 
 package configs
 
-var RCAenvironment = "rootCA-default.json"
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+var CertConfigFile = "rootCA-default.json"
 var ServerCertEnvironment = "serverCert-default.json"
+
+func Json2creds() CertConfigStruct {
+	var payload CertConfigStruct
+	rcDir, _ := os.UserHomeDir()
+	rcFile := rcDir + "/.config/certificatemanager/" + CertConfigFile
+	jFile, _ := os.ReadFile(rcFile)
+	err := json.Unmarshal(jFile, &payload)
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+	return payload
+}
 
 func ReadConfigCA() error {
 	return nil

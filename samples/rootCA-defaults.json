@@ -1,0 +1,15 @@
+{
+ "Country" : "CA",
+ "State" : "Quebec",
+ "Locality" : "Blainville",
+ "Organization" : "famillegratton",
+ "Organizational Unit" : "",
+ "Common Name" : "famillegratton.net ROOT CA",
+ "Email Addresses" : ["certs@famillegratton.net"],
+ "Duration" : 10,
+ "Usage" : ["Digital Signature", "Certificate Sign", "CRL Sign"],
+ "DNS" : [],
+ "IPs" : [],
+ "Certificate Directory" : "/tmp/",
+ "Certificate Name" : "rootCAfamillegratton"
+}

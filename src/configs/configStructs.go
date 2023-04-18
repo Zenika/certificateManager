@@ -17,7 +17,7 @@ import "net"
 //	BasicInfos    BaseCertinfo
 //}
 
-type RootCAconfig struct {
+type CertConfigStruct struct {
 	Country              string   `json:"C"`
 	Province             string   `json:"ST"`
 	Locality             string   `json:"L"`
@@ -27,8 +27,11 @@ type RootCAconfig struct {
 	EmailAddresses       []string `json:"Email,omitempty"`
 	Duration             int      `json:"Duration"`
 	Usage                []string `json:"Usage"`
-	DNS                  []string `json:"DNS,omitempty"`
-	IPS                  []net.IP `json:"IPS,omitempty"`
+	DNSNames             []string `json:"DNS,omitempty"`
+	IPAddresses          []net.IP `json:"IPS,omitempty"`
 	CertificateDirectory string   `json:"CertificateDirectory"`
 	CertificateName      string   `json:"CertificateName"`
+	IsCA                 bool     `json:"IsCA"`
 }
+
+var CertConfig CertConfigStruct

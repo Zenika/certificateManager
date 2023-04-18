@@ -44,8 +44,7 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(clCmd)
-	rootCmd.PersistentFlags().StringVarP(&configs.RCAenvironment, "caenv", "c", "rootCA-default.json", "Root CA configuration file.")
-	rootCmd.PersistentFlags().StringVarP(&configs.ServerCertEnvironment, "scenv", "s", "serverCert-default.json", "Server certificates configuration file.")
+	rootCmd.PersistentFlags().StringVarP(&configs.CertConfigFile, "config", "c", "rootCA-default.json", "Root CA configuration file.")
 }
 
 //func initConfig() {

@@ -46,10 +46,20 @@ var caCreateCmd = &cobra.Command{
 	},
 }
 
+var caVerifyCmd = &cobra.Command{
+	Use:   "verify certificate_filename",
+	Short: "verify the created CA certificate",
+	//Long:    `This is where you will manage (add/remove) your rootCAs\' configs files.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		ca.VerifyCACertificate(args[0])
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(caCmd)
 	caCmd.AddCommand(caConfigCmd)
 	caCmd.AddCommand(caCreateCmd)
+	caCmd.AddCommand(caVerifyCmd)
 
 	// Here you will define your flags and configuration settings.
 
