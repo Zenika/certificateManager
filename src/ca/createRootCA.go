@@ -7,6 +7,7 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
+	"fmt"
 	"math/big"
 	"net"
 	"os"
@@ -96,11 +97,15 @@ func CreateRootCA() {
 		DNSNames:           []string{"famillegratton.net", "nas.famillegratton.net", "lan.famillegratton.net"},
 		//IPAddresses:          []net.IP{"10.1.1.11"},
 		IPAddresses:          []net.IP{net.ParseIP("10.1.1.11"), net.ParseIP("127.0.0.1")},
-		CertificateDirectory: "/tmp/",
+		CertificateDirectory: "/tmp",
 		CertificateName:      "rootCA",
 	}
+
 	err := createCACert(config)
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Printf("Certificate files %s/%s.crt and %s/%s.key were created.\n",
+		config.CertificateDirectory, config.CertificateName, config.CertificateDirectory, config.CertificateName)
 }

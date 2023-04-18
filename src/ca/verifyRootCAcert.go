@@ -43,8 +43,23 @@ func VerifyCACertificate(certFilePath string) error {
 	fmt.Printf("    Serial Number: %v\n", parsedCert.SerialNumber)
 	fmt.Printf("    Not Before: %v\n", parsedCert.NotBefore)
 	fmt.Printf("    Not After : %v\n", parsedCert.NotAfter)
+	if len(parsedCert.IPAddresses) > 0 {
+		fmt.Println("    IP Address(es):")
+		for _, ipa := range parsedCert.IPAddresses {
+			fmt.Printf("\t- %s\n", ipa)
+		}
+	}
+	if len(parsedCert.EmailAddresses) > 0 {
+		fmt.Println("    Email Address(es):")
+		for _, email := range parsedCert.EmailAddresses {
+			fmt.Printf("\t- %s\n", email)
+		}
+	}
 	if len(parsedCert.URIs) > 0 {
-		fmt.Printf("    URIs : %v\n", parsedCert.URIs)
+		fmt.Println("    URIs:")
+		for _, uri := range parsedCert.URIs {
+			fmt.Printf("\t- %v\n", uri)
+		}
 	}
 	if CaVerifyVerbose {
 		fmt.Printf("    Signature Algorithm: %v\n", parsedCert.SignatureAlgorithm)
@@ -71,18 +86,6 @@ func VerifyCACertificate(certFilePath string) error {
 		fmt.Println("        DNS:")
 		for _, dns := range parsedCert.DNSNames {
 			fmt.Printf("        \t- %s\n", dns)
-		}
-	}
-	if len(parsedCert.IPAddresses) > 0 {
-		fmt.Println("        IP Address(es):")
-		for _, ipa := range parsedCert.IPAddresses {
-			fmt.Printf("        \t- %s\n", ipa)
-		}
-	}
-	if len(parsedCert.EmailAddresses) > 0 {
-		fmt.Println("        Email Address(es):")
-		for _, email := range parsedCert.EmailAddresses {
-			fmt.Printf("        \t- %s\n", email)
 		}
 	}
 
