@@ -17,6 +17,7 @@ func VerifyCACertificate(certFilePath string) error {
 	// Read the certificate file
 	certPEMBlock, err := os.ReadFile(certFilePath)
 	if err != nil {
+		// we let caVerifyCmd() deal with the error
 		return err
 	}
 
@@ -42,14 +43,11 @@ func VerifyCACertificate(certFilePath string) error {
 	fmt.Printf("    Serial Number: %v\n", parsedCert.SerialNumber)
 	fmt.Printf("    Not Before: %v\n", parsedCert.NotBefore)
 	fmt.Printf("    Not After : %v\n", parsedCert.NotAfter)
-	//fmt.Printf("    DNS Names : %v\n", parsedCert.DNSNames)
-	//fmt.Printf("    Email Addresses : %v\n", parsedCert.EmailAddresses)
-	//fmt.Printf("    IP Addresses : %v\n", parsedCert.IPAddresses)
 	if len(parsedCert.URIs) > 0 {
 		fmt.Printf("    URIs : %v\n", parsedCert.URIs)
 	}
-	fmt.Printf("    Signature Algorithm: %v\n", parsedCert.SignatureAlgorithm)
 	if CaVerifyVerbose {
+		fmt.Printf("    Signature Algorithm: %v\n", parsedCert.SignatureAlgorithm)
 		fmt.Printf("    Signature: %v\n", parsedCert.Signature)
 	}
 
