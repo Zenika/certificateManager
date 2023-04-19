@@ -9,13 +9,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// configCmd represents the configs command
+// configCmd represents the config command
 var configCmd = &cobra.Command{
-	Use:   "configs",
+	Use:   "config",
 	Short: "Configuration file management",
 	Long:  `This is where you can create a templated file, edit/delete an existing config file, etc.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("configs called")
+		fmt.Println("config called")
 	},
 }
 

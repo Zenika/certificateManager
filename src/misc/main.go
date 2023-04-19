@@ -13,7 +13,8 @@ func Changelog() {
 	fmt.Print(`
 VERSION         DATE                    COMMENT
 -------         ----                    -------
-0.100           2023.04.16              near-configs-aware
+0.100           2023.04.16              near-config-aware
+0.200			2023.04.18				ca subcommands
 `)
 	fmt.Println()
 }

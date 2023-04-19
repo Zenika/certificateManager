@@ -88,6 +88,5 @@ func VerifyCACertificate(certFilePath string) error {
 			fmt.Printf("        \t- %s\n", dns)
 		}
 	}
-
 	return nil
 }

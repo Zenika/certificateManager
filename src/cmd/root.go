@@ -4,7 +4,7 @@
 package cmd
 
 import (
-	"certificateManager/configs"
+	"certificateManager/config"
 	"certificateManager/misc"
 	"github.com/spf13/cobra"
 	"os"
@@ -39,5 +39,5 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(clCmd)
-	rootCmd.PersistentFlags().StringVarP(&configs.CertConfigFile, "config", "c", "rootCA-default.json", "Root CA configuration file.")
+	rootCmd.PersistentFlags().StringVarP(&config.CertConfigFile, "config", "c", "defaultConfig.json", "Certificate configuration file.")
 }
