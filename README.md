@@ -59,7 +59,7 @@ rm /root/nexus.key`
 Refresh your repo lists (`dnf clean all && dnf makecache`, `apt-get update`, `zypper ref`), and then use your usual tool to download and install
 
 <H2>How to use the software</H2>
-<H3>Config steps</H3>
+<H3>Config steps  ->> WIP, do not use, yet</H3>
 ==> First, you will need to generate a skeleton of configuration file:
 `certificateManager config CAtemplate` :
 This will create a skeleton file to generate custom rootCAs under `$HOME/.config/certificateManager/rootCA-default.json`
@@ -69,16 +69,16 @@ Edit this file as needed. You can validate its format if the `jq` utility is ins
 `certificateManager config Certtemplate` . The config file will be named `$HOME/.config/certificateManager/serverCert-default.json`
 
 This software allows you to use different config files at runtime with the `-e` flag. For instance, if I wanted to run the tool using the config for a server named mediaserver1, you would something like this:
-`certificateManager -e mediaserver1 OTHER_COMMANDS`. This would fetch all of its required info from `$HOME/.config/certificateManager/mediaserver1.json`
+`certificateManager -c mediaserver1 OTHER_COMMANDS`. This would fetch all of its required info from `$HOME/.config/certificateManager/mediaserver1.json`
 
 <H3>Create a custom root CA</H3>
 Assuming that you have a config file named `rootca.json` :<br>
-`certificateManager -e rootca ca create`<br>
+`certificateManager -c rootca ca create`<br>
 Please have a look at the different flags you could use: `certificateManager ca -h` or `certificateManager ca create -h`
 
 <H3>Create a server certificate signed against your own root CA</H3>
 Assuming you have a config file named `server.json` :<br>
-`certificateManager -e server.json cert create`. Again, `certificateManager cert -h` is your friend.
+`certificateManager -c server.json cert create`. Again, `certificateManager cert -h` is your friend.
 
 
 As a matter of fact, this software uses GO's COBRA-CLI framework, a very arg parser commonly used by Docker, Kubernetes, Terraform. You can get help from many, if not all commands.
