@@ -36,6 +36,12 @@ func VerifyCACertificate(certFilePath string) error {
 
 	// Print certificate information
 	fmt.Printf("Certificate: %s\n---\n", certFilePath)
+	fmt.Printf("   Is this a Certificate Authority (root CA) ? ")
+	if parsedCert.IsCA {
+		fmt.Println("yes")
+	} else {
+		fmt.Println("no")
+	}
 	if CaVerifyVerbose {
 		fmt.Printf("   Data:\n%s\n", string(certPEMBlock))
 	}
@@ -71,13 +77,14 @@ func VerifyCACertificate(certFilePath string) error {
 	fmt.Println("\n   x509v3 extensions\n   -----------------")
 
 	// Print X509v3 Basic Constraints
-	if parsedCert.BasicConstraintsValid {
-		if parsedCert.IsCA {
-			fmt.Printf("   x509v3 Basic Constraints:\n\tIs CA: true\n")
-		} else {
-			fmt.Printf("   x509v3 Basic Constraints:\n\tIs CA: false\n")
-		}
-	}
+	//if parsedCert.BasicConstraintsValid {
+	//	fmt.Printf("   x509v3 Basic Constraints:\n\tIs CA: ")
+	//	if parsedCert.IsCA {
+	//		fmt.Println("true")
+	//	} else {
+	//		fmt.Println("false")
+	//	}
+	//}
 	// Print X509v3 Key Usage
 	if parsedCert.KeyUsage != 0 {
 		fmt.Printf("\n   x509v3 Key usage:\n")

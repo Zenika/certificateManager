@@ -36,29 +36,29 @@ func CreateRootCA(privateKeySize int) error {
 	if !strings.HasSuffix(config.CertConfigFile, ".json") {
 		config.CertConfigFile += ".json"
 	}
-	CertConfig, err := config.Json2Config()
+	config.CertConfig, err = config.Json2Config()
 	if err != nil {
 		return err
 	}
 	// We cannot allow a certificate to last 0yr, 0mt, 0d, so we set a default value of 1 year
-	if CertConfig.Duration == 0 {
-		CertConfig.Duration = 1
+	if config.CertConfig.Duration == 0 {
+		config.CertConfig.Duration = 1
 	}
 	// Create a new self-signed root certificate template
 	template := &x509.Certificate{
 		SerialNumber:          big.NewInt(1),
-		Subject:               pkix.Name{CommonName: CertConfig.CommonName, Locality: []string{CertConfig.Locality}, Country: []string{CertConfig.Country}, Organization: []string{CertConfig.Organization}, OrganizationalUnit: []string{CertConfig.OrganizationalUnit}, Province: []string{CertConfig.Province}},
+		Subject:               pkix.Name{CommonName: config.CertConfig.CommonName, Locality: []string{config.CertConfig.Locality}, Country: []string{config.CertConfig.Country}, Organization: []string{config.CertConfig.Organization}, OrganizationalUnit: []string{config.CertConfig.OrganizationalUnit}, Province: []string{config.CertConfig.Province}},
 		NotBefore:             time.Now(),
-		NotAfter:              time.Now().AddDate(CertConfig.Duration, 0, 0),
-		KeyUsage:              config.GetKeyUsageFromStrings(CertConfig.KeyUsage),
-		IsCA:                  CertConfig.IsCA,
+		NotAfter:              time.Now().AddDate(config.CertConfig.Duration, 0, 0),
+		KeyUsage:              config.GetKeyUsageFromStrings(config.CertConfig.KeyUsage),
+		IsCA:                  config.CertConfig.IsCA,
 		BasicConstraintsValid: true,
-		DNSNames:              CertConfig.DNSNames,
-		IPAddresses:           CertConfig.IPAddresses,
-		EmailAddresses:        CertConfig.EmailAddresses,
+		DNSNames:              config.CertConfig.DNSNames,
+		IPAddresses:           config.CertConfig.IPAddresses,
+		EmailAddresses:        config.CertConfig.EmailAddresses,
 	}
-	if CertConfig.IsCA {
-		template.KeyUsage = config.ReindexKeyUsage(CertConfig)
+	if config.CertConfig.IsCA {
+		template.KeyUsage = config.ReindexKeyUsage(config.CertConfig)
 	}
 	// Create the root certificate using the template and the private key
 	rootCertBytes, err := x509.CreateCertificate(rand.Reader, template, template, &privateKey.PublicKey, privateKey)
@@ -67,7 +67,7 @@ func CreateRootCA(privateKeySize int) error {
 	}
 
 	// Write the private key and root certificate to files
-	privateKeyFile, err := os.Create(filepath.Join(CertConfig.CertificateDirectory, CertConfig.CertificateName) + ".key")
+	privateKeyFile, err := os.Create(filepath.Join(config.CertConfig.CertificateDirectory, config.CertConfig.CertificateName) + ".key")
 	if err != nil {
 		return err
 	}
@@ -78,7 +78,7 @@ func CreateRootCA(privateKeySize int) error {
 		return err
 	}
 
-	rootCertFile, err := os.Create(filepath.Join(CertConfig.CertificateDirectory, CertConfig.CertificateName) + ".crt")
+	rootCertFile, err := os.Create(filepath.Join(config.CertConfig.CertificateDirectory, config.CertConfig.CertificateName) + ".crt")
 	if err != nil {
 		return err
 	}

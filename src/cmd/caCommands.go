@@ -37,7 +37,7 @@ var caCreateCmd = &cobra.Command{
 			fmt.Println("Error while creating the root CA:")
 			fmt.Println(err)
 		} else {
-			fmt.Printf("Certificate %s with a keysize of %v bits has been created in %s\n", config.CertConfig.CertificateName, privKeySize, config.CertConfig.CertificateDirectory)
+			fmt.Printf("A %v bits-keysize certificate %s has been created in %s\n", privKeySize, config.CertConfig.CertificateName, config.CertConfig.CertificateDirectory)
 			//fmt.Println("Certificate has been created.")
 		}
 	},

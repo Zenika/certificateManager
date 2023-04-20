@@ -23,6 +23,7 @@ type CertConfigStruct struct {
 	IPAddresses          []net.IP `json:"IPAddresses,omitempty"`
 	CertificateDirectory string   `json:"CertificateDirectory"`
 	CertificateName      string   `json:"CertificateName"`
+	Comments             []string `json:"Comments,omitempty"`
 }
 
 type EnvConfigStruct struct {

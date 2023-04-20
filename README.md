@@ -49,6 +49,7 @@ deb [arch=amd64] https://nexus.famillegratton.net:1808/repository/aptLocal nexus
 Refresh your repo lists (`dnf clean all && dnf makecache`, `apt-get update`, `zypper ref`), and then use your usual tool to download and install
 
 <H2>How to use the software</H2>
+<H3>Config steps</H3>
 ==> First, you will need to generate a skeleton of configuration file:
 `certificateManager config CAtemplate` :
 This will create a skeleton file to generate custom rootCAs under `$HOME/.config/certificateManager/rootCA-default.json`

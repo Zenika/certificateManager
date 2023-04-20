@@ -50,17 +50,13 @@ func GetKeyUsageFromStrings(usageStrings []string) x509.KeyUsage {
 			keyUsage |= x509.KeyUsageDataEncipherment
 		case "key agreement":
 			keyUsage |= x509.KeyUsageKeyAgreement
-		case "cert sign":
-		case "certificate sign":
+		case "cert sign", "certificate sign":
 			keyUsage |= x509.KeyUsageCertSign
-		case "crl sign":
-		case "crl":
+		case "crl sign", "crl":
 			keyUsage |= x509.KeyUsageCRLSign
-		case "encipheronly":
-		case "encipher":
+		case "encipheronly", "encipher":
 			keyUsage |= x509.KeyUsageEncipherOnly
-		case "decipheronly":
-		case "decipher":
+		case "decipheronly", "decipher":
 			keyUsage |= x509.KeyUsageDecipherOnly
 		}
 	}
