@@ -53,7 +53,7 @@ Refresh your repo lists (`dnf clean all && dnf makecache`, `apt-get update`, `zy
 ==> First, you will need to generate a skeleton of configuration file:
 `certificateManager config CAtemplate` :
 This will create a skeleton file to generate custom rootCAs under `$HOME/.config/certificateManager/rootCA-default.json`
-Edit this file as needed.
+Edit this file as needed. You can validate its format if the `jq` utility is installed on your system: `jq < $YOUR_FILE`
 
 ==> Then, if you need server certificates signed against that rootCA, you will need to generate its template, too:
 `certificateManager config Certtemplate` . The config file will be named `$HOME/.config/certificateManager/serverCert-default.json`
