@@ -29,6 +29,7 @@ var caCmd = &cobra.Command{
 	},
 }
 
+// Create a rootCA based on the config file as defined with the -c global flag
 var caCreateCmd = &cobra.Command{
 	Use:   "create",
 	Short: "rootCA creation command",
@@ -45,6 +46,7 @@ var caCreateCmd = &cobra.Command{
 	},
 }
 
+// Verify a rootCA
 var caVerifyCmd = &cobra.Command{
 	Use:   "verify certificate_filename",
 	Short: "verify the created CA certificate",
@@ -64,11 +66,27 @@ var caVerifyCmd = &cobra.Command{
 	},
 }
 
+// Edit a root CA based on the config file as defined with the -c global flag
+var caEditCmd = &cobra.Command{
+	Use:     "edit",
+	Aliases: []string{"update"},
+	Short:   "update a CA certificate",
+	Long: `The configuration file describing the certificate should be present.
+If not, empty or defaults values will be supplied, and the file will be created`,
+	Run: func(cmd *cobra.Command, args []string) {
+		err := ca.EditCACertificate()
+		if err != nil {
+			fmt.Println(err)
+		}
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(caCmd)
 	caCmd.AddCommand(caCreateCmd)
 	caCmd.AddCommand(caVerifyCmd)
 
 	caVerifyCmd.Flags().BoolVarP(&ca.CaVerifyVerbose, "verbose", "v", false, "Display the full output")
+	caVerifyCmd.Flags().BoolVarP(&ca.CaVerifyComments, "comments", "", false, "Display the comments (if any) at the end of the configuration file")
 	caCreateCmd.Flags().IntVarP(&privKeySize, "keysize", "b", 4096, "Certificate private key size in bits")
 }

@@ -13,6 +13,7 @@ import (
 )
 
 var CaVerifyVerbose = false
+var CaVerifyComments = false
 
 func VerifyCACertificate(certFilePath string) error {
 	// Read the certificate file
@@ -76,16 +77,6 @@ func VerifyCACertificate(certFilePath string) error {
 	// x509v3 EXTENSIONS:
 	fmt.Println("\n   x509v3 extensions\n   -----------------")
 
-	// Print X509v3 Basic Constraints
-	//if parsedCert.BasicConstraintsValid {
-	//	fmt.Printf("   x509v3 Basic Constraints:\n\tIs CA: ")
-	//	if parsedCert.IsCA {
-	//		fmt.Println("true")
-	//	} else {
-	//		fmt.Println("false")
-	//	}
-	//}
-	// Print X509v3 Key Usage
 	if parsedCert.KeyUsage != 0 {
 		fmt.Printf("\n   x509v3 Key usage:\n")
 		ku := config.GetStringsFromKeyUsage(parsedCert.KeyUsage)
@@ -99,6 +90,20 @@ func VerifyCACertificate(certFilePath string) error {
 		fmt.Printf("\n   x509v3 Subject Alternative Names (SAN):\n")
 		for _, dns := range parsedCert.DNSNames {
 			fmt.Printf("\t• %s\n", dns)
+		}
+	}
+
+	if CaVerifyComments {
+		cfg, err := config.Json2Config()
+		if err != nil {
+			return err
+		}
+		if len(cfg.Comments) > 0 {
+			fmt.Println("\n\nComments (part of the config, but NOT of the certificate itself)\n----------------------------------------------------------------")
+			for _, cm := range cfg.Comments {
+				fmt.Printf("\t• %s\n", cm)
+			}
+			fmt.Println()
 		}
 	}
 	return nil
