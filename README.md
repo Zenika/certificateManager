@@ -34,6 +34,8 @@ Copy the following block as `famillegratton.repo`; the file should be in `/etc/y
 
 ```
 [famillegratton]
+name=famillegratton
+gpgcheck=0
 enabled=1
 autorefresh=1
 baseurl=https://nexus.famillegratton.net:1808/repository/dnfLocal
