@@ -47,8 +47,15 @@ baseurl=https://nexus.famillegratton.net:1808/repository/dnfLocal
 ```
 deb [arch=amd64] https://nexus.famillegratton.net:1808/repository/aptLocal nexus main
 ```
-2. As root, fetch the repo's GPG key: `cd /root && wget --no-check-certificate https://nginx.famillegratton.net:9443/gpg/nexus-public.gpg.key /root/nexus.key && apt-key add /root/nexus.key && rm /root/nexus.key`
-
+2. As root, fetch the repo's GPG key:
+```
+cd /root
+apt install -y gnupg
+wget --no-check-certificate https://nginx.famillegratton.net:9443/gpg/nexus-public.gpg.key /root/nexus.key
+apt-key add /root/nexus.key
+rm /root/nexus.key`
+```
+<br><br>
 Refresh your repo lists (`dnf clean all && dnf makecache`, `apt-get update`, `zypper ref`), and then use your usual tool to download and install
 
 <H2>How to use the software</H2>
