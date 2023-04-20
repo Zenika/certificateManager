@@ -42,11 +42,12 @@ baseurl=https://nexus.famillegratton.net:1808/repository/dnfLocal
 ```
 
 <H3>Debian/Ubuntu</H3>
-Create the following file under `/etc/apt/sources.list.d/famillegratton.list` :
+1. Create the following file under `/etc/apt/sources.list.d/famillegratton.list` :
 
 ```
 deb [arch=amd64] https://nexus.famillegratton.net:1808/repository/aptLocal nexus main
 ```
+2. As root, fetch the repo's GPG key: `cd /root && wget --no-check-certificate https://nginx.famillegratton.net:9443/gpg/nexus-public.gpg.key /root/nexus.key && apt-key add /root/nexus.key && rm /root/nexus.key`
 
 Refresh your repo lists (`dnf clean all && dnf makecache`, `apt-get update`, `zypper ref`), and then use your usual tool to download and install
 
