@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
+	"strings"
 )
 
 var privKeySize int
@@ -45,11 +46,14 @@ var caCreateCmd = &cobra.Command{
 var caVerifyCmd = &cobra.Command{
 	Use:   "verify certificate_filename",
 	Short: "verify the created CA certificate",
-	//Long:    `This is where you will manage (add/remove) your rootCAs\' config files.`,
+	Long:  `If you do not provide a filename extension (.crt or .pem), .crt is assumed.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) < 1 {
 			fmt.Println("You need to provide the certificate name to be verified")
 			os.Exit(0)
+		}
+		if !strings.HasSuffix(args[0], ".crt") && !strings.HasSuffix(args[0], ".pem") {
+			args[0] += ".crt"
 		}
 		err := ca.VerifyCACertificate(args[0])
 		if err != nil {

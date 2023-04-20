@@ -40,7 +40,7 @@ func CreateRootCA(privateKeySize int) error {
 	if err != nil {
 		return err
 	}
-	// We cannot allow a certificate to last 0yr, 0mt, 0d, so we set a defa
+	// We cannot allow a certificate to last 0yr, 0mt, 0d, so we set a default value of 1 year
 	if CertConfig.Duration == 0 {
 		CertConfig.Duration = 1
 	}
@@ -50,7 +50,7 @@ func CreateRootCA(privateKeySize int) error {
 		Subject:               pkix.Name{CommonName: CertConfig.CommonName, Locality: []string{CertConfig.Locality}, Country: []string{CertConfig.Country}, Organization: []string{CertConfig.Organization}, OrganizationalUnit: []string{CertConfig.OrganizationalUnit}, Province: []string{CertConfig.Province}},
 		NotBefore:             time.Now(),
 		NotAfter:              time.Now().AddDate(CertConfig.Duration, 0, 0),
-		KeyUsage:              x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature,
+		KeyUsage:              config.GetKeyUsageFromStrings(CertConfig.KeyUsage),
 		IsCA:                  CertConfig.IsCA,
 		BasicConstraintsValid: true,
 		DNSNames:              CertConfig.DNSNames,
@@ -58,7 +58,7 @@ func CreateRootCA(privateKeySize int) error {
 		EmailAddresses:        CertConfig.EmailAddresses,
 	}
 	if CertConfig.IsCA {
-		template.KeyUsage = x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature
+		template.KeyUsage = config.ReindexKeyUsage(CertConfig)
 	}
 	// Create the root certificate using the template and the private key
 	rootCertBytes, err := x509.CreateCertificate(rand.Reader, template, template, &privateKey.PublicKey, privateKey)

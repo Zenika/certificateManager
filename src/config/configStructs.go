@@ -5,25 +5,32 @@
 package config
 
 import (
-	"crypto/x509"
 	"net"
 )
 
 type CertConfigStruct struct {
-	Country              string        `json:"Country"`
-	Province             string        `json:"Province"`
-	Locality             string        `json:"Locality"`
-	Organization         string        `json:"Organization"`
-	OrganizationalUnit   string        `json:"OrganizationalUnit,omitempty"`
-	CommonName           string        `json:"CommonName"`
-	IsCA                 bool          `json:"IsCA,omitempty"`
-	EmailAddresses       []string      `json:"EmailAddresses,omitempty"`
-	Duration             int           `json:"Duration"`
-	KeyUsage             x509.KeyUsage `json:"KeyUsage"`
-	DNSNames             []string      `json:"DNSNames,omitempty"`
-	IPAddresses          []net.IP      `json:"IPAddresses,omitempty"`
-	CertificateDirectory string        `json:"CertificateDirectory"`
-	CertificateName      string        `json:"CertificateName"`
+	Country              string   `json:"Country"`
+	Province             string   `json:"Province"`
+	Locality             string   `json:"Locality"`
+	Organization         string   `json:"Organization"`
+	OrganizationalUnit   string   `json:"OrganizationalUnit,omitempty"`
+	CommonName           string   `json:"CommonName"`
+	IsCA                 bool     `json:"IsCA,omitempty"`
+	EmailAddresses       []string `json:"EmailAddresses,omitempty"`
+	Duration             int      `json:"Duration"`
+	KeyUsage             []string `json:"KeyUsage"`
+	DNSNames             []string `json:"DNSNames,omitempty"`
+	IPAddresses          []net.IP `json:"IPAddresses,omitempty"`
+	CertificateDirectory string   `json:"CertificateDirectory"`
+	CertificateName      string   `json:"CertificateName"`
 }
 
-var CertConfig = CertConfigStruct{Duration: 1, KeyUsage: 97}
+type EnvConfigStruct struct {
+	CertificateRootDir string `json:"CertificateRootDir"`
+	RootCAdir          string `json:"RootCAdir"`
+	ServerCertsDir     string `json:"ServerCertsDir"`
+	RemoveDuplicates   bool   `json:"RemoveDuplicates"`
+}
+
+var CertConfig = CertConfigStruct{Duration: 1, KeyUsage: []string{"cert sign", "crl sign", "digital signature"}}
+var EnvConfig EnvConfigStruct

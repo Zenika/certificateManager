@@ -10,7 +10,7 @@ import (
 	"os"
 )
 
-var version = "0.101 (2023.03.20)"
+var version = "0.200 (2023.04.20)"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -39,5 +39,5 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(clCmd)
-	rootCmd.PersistentFlags().StringVarP(&config.CertConfigFile, "config", "c", "defaultConfig.json", "Certificate configuration file.")
+	rootCmd.PersistentFlags().StringVarP(&config.CertConfigFile, "config", "c", "defaultCertConfig.json", "Certificate configuration file.")
 }

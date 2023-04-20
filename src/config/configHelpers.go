@@ -11,7 +11,8 @@ import (
 	"strings"
 )
 
-var CertConfigFile = "defaultConfig.json"
+var CertConfigFile = "defaultCertConfig.json"
+var EnvConfigFile = "defaultEnvConfig.json"
 
 //var ServerCertEnvironment = "serverCert-default.json"
 
@@ -100,4 +101,26 @@ func GetStringsFromKeyUsage(keyUsage x509.KeyUsage) []string {
 		usages = append(usages, "decipher only")
 	}
 	return usages
+}
+
+// template.KeyUsage = x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature
+
+// ReindexKeyUsage() : Ensures that the CertConfigStruct.KeyUsage contains only unique values
+func ReindexKeyUsage(cfg CertConfigStruct) x509.KeyUsage {
+	org := cfg.KeyUsage
+	// We append the CA-related usages
+	org = append(org, "cert sign", "crl sign", "digital signature")
+
+	// We map the new slices
+	//[]string to map : https://kylewbanks.com/blog/creating-unique-slices-in-go
+	s := make([]string, 0, len(org))
+	m := make(map[string]bool)
+
+	for _, value := range org {
+		if _, ok := m[value]; !ok {
+			m[value] = true
+			s = append(s, value)
+		}
+	}
+	return GetKeyUsageFromStrings(s)
 }

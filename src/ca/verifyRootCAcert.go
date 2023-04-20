@@ -5,6 +5,7 @@
 package ca
 
 import (
+	"certificateManager/config"
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
@@ -34,58 +35,63 @@ func VerifyCACertificate(certFilePath string) error {
 	}
 
 	// Print certificate information
-	fmt.Printf("Certificate:\n")
+	fmt.Printf("Certificate: %s\n---\n", certFilePath)
 	if CaVerifyVerbose {
-		fmt.Printf("    Data:\n%s\n", string(certPEMBlock))
+		fmt.Printf("   Data:\n%s\n", string(certPEMBlock))
 	}
-	fmt.Printf("    Subject: %v\n", parsedCert.Subject)
-	fmt.Printf("    Issuer: %v\n", parsedCert.Issuer)
-	fmt.Printf("    Serial Number: %v\n", parsedCert.SerialNumber)
-	fmt.Printf("    Not Before: %v\n", parsedCert.NotBefore)
-	fmt.Printf("    Not After : %v\n", parsedCert.NotAfter)
+	fmt.Printf("   Serial Number: %v\n\n", parsedCert.SerialNumber)
+	fmt.Printf("   Subject: %v\n", parsedCert.Subject)
+	fmt.Printf("   Issuer: %v\n", parsedCert.Issuer)
+	fmt.Printf("\n   Not Before: %v\n", parsedCert.NotBefore)
+	fmt.Printf("   Not After : %v\n", parsedCert.NotAfter)
 	if len(parsedCert.IPAddresses) > 0 {
-		fmt.Println("    IP Address(es):")
+		fmt.Println("\n   IP Address(es):")
 		for _, ipa := range parsedCert.IPAddresses {
-			fmt.Printf("\t- %s\n", ipa)
+			fmt.Printf("\t• %s\n", ipa)
 		}
 	}
 	if len(parsedCert.EmailAddresses) > 0 {
-		fmt.Println("    Email Address(es):")
+		fmt.Println("\n   Email Address(es):")
 		for _, email := range parsedCert.EmailAddresses {
-			fmt.Printf("\t- %s\n", email)
+			fmt.Printf("\t• %s\n", email)
 		}
 	}
 	if len(parsedCert.URIs) > 0 {
-		fmt.Println("    URIs:")
+		fmt.Println("\n   URIs:")
 		for _, uri := range parsedCert.URIs {
-			fmt.Printf("\t- %v\n", uri)
+			fmt.Printf("\t• %v\n", uri)
 		}
 	}
 	if CaVerifyVerbose {
-		fmt.Printf("    Signature Algorithm: %v\n", parsedCert.SignatureAlgorithm)
-		fmt.Printf("    Signature: %v\n", parsedCert.Signature)
+		fmt.Printf("   Signature Algorithm: %v\n", parsedCert.SignatureAlgorithm)
+		fmt.Printf("   Signature: %v\n", parsedCert.Signature)
 	}
 
-	// Print X509v3 Key Usage information
-	if parsedCert.KeyUsage != 0 {
-		fmt.Printf("    X509v3 Key Usage: %v\n", parsedCert.KeyUsage)
-	}
+	// x509v3 EXTENSIONS:
+	fmt.Println("\n   x509v3 extensions\n   -----------------")
 
-	// Print X509v3 Basic Constraints information
+	// Print X509v3 Basic Constraints
 	if parsedCert.BasicConstraintsValid {
 		if parsedCert.IsCA {
-			fmt.Printf("    X509v3 Basic Constraints:\n\tIs CA: true\n")
+			fmt.Printf("   x509v3 Basic Constraints:\n\tIs CA: true\n")
 		} else {
-			fmt.Printf("    X509v3 Basic Constraints:\n\tIs CA: false\n")
+			fmt.Printf("   x509v3 Basic Constraints:\n\tIs CA: false\n")
+		}
+	}
+	// Print X509v3 Key Usage
+	if parsedCert.KeyUsage != 0 {
+		fmt.Printf("\n   x509v3 Key usage:\n")
+		ku := config.GetStringsFromKeyUsage(parsedCert.KeyUsage)
+		for _, k := range ku {
+			fmt.Printf("\t• %s\n", k)
 		}
 	}
 
-	// Print X509v3 Subject Alternative Name information
+	// Print X509v3 Subject Alternative Name
 	if len(parsedCert.DNSNames) > 0 {
-		fmt.Printf("    X509v3 Subject Alternative Name(s):\n")
-		fmt.Println("        DNS:")
+		fmt.Printf("\n   x509v3 Subject Alternative Names (SAN):\n")
 		for _, dns := range parsedCert.DNSNames {
-			fmt.Printf("        \t- %s\n", dns)
+			fmt.Printf("\t• %s\n", dns)
 		}
 	}
 	return nil

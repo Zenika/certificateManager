@@ -1,0 +1,6 @@
+{
+ "CertificateRootDir" : "/certificates",
+ "RootCAdir" : "/certificates/rootCA",
+ "ServerCertsDir" : "/certificates/servers",
+ "RemoveDuplicates": true
+}
