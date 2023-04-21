@@ -19,6 +19,10 @@ var EnvConfigFile = "defaultEnvConfig.json"
 func Json2Config() (CertConfigStruct, error) {
 	var payload CertConfigStruct
 	var err error
+
+	if !strings.HasSuffix(CertConfigFile, ".json") {
+		CertConfigFile += ".json"
+	}
 	rcDir, _ := os.UserHomeDir()
 	rcFile := rcDir + "/.config/certificateManager/" + CertConfigFile
 	jFile, err := os.ReadFile(rcFile)

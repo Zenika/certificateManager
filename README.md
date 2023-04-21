@@ -34,7 +34,7 @@ Copy the following block as `famillegratton.repo`; the file should be in `/etc/y
 
 ```
 [famillegratton]
-name=famillegratton
+name=Famille Gratton
 gpgcheck=0
 enabled=1
 autorefresh=1

@@ -86,7 +86,7 @@ func init() {
 	caCmd.AddCommand(caCreateCmd)
 	caCmd.AddCommand(caVerifyCmd)
 
-	caVerifyCmd.Flags().BoolVarP(&ca.CaVerifyVerbose, "verbose", "v", false, "Display the full output")
-	caVerifyCmd.Flags().BoolVarP(&ca.CaVerifyComments, "comments", "", false, "Display the comments (if any) at the end of the configuration file")
-	caCreateCmd.Flags().IntVarP(&privKeySize, "keysize", "b", 4096, "Certificate private key size in bits")
+	caVerifyCmd.Flags().BoolVarP(&ca.CaVerifyVerbose, "verbose", "v", false, "display the full output")
+	caVerifyCmd.Flags().BoolVarP(&ca.CaVerifyComments, "comments", "", false, "display the comments (if any) at the end of the configuration file")
+	caCreateCmd.Flags().IntVarP(&privKeySize, "keysize", "b", 4096, "certificate private key size in bits")
 }

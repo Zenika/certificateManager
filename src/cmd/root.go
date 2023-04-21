@@ -39,5 +39,5 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(clCmd)
-	rootCmd.PersistentFlags().StringVarP(&config.CertConfigFile, "config", "c", "defaultCertConfig.json", "Certificate configuration file.")
+	rootCmd.PersistentFlags().StringVarP(&config.CertConfigFile, "config", "c", "defaultCertConfig.json", "certificate configuration file.")
 }

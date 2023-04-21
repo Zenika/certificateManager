@@ -10,7 +10,6 @@ import (
 	"math/big"
 	"os"
 	"path/filepath"
-	"strings"
 	"time"
 )
 
@@ -33,9 +32,7 @@ func CreateRootCA(privateKeySize int) error {
 	if err != nil {
 		return err
 	}
-	if !strings.HasSuffix(config.CertConfigFile, ".json") {
-		config.CertConfigFile += ".json"
-	}
+
 	config.CertConfig, err = config.Json2Config()
 	if err != nil {
 		return err
