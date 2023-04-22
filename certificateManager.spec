@@ -56,6 +56,20 @@ install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
+* Sat Apr 22 2023 builder <builder@famillegratton.net> 0.300-0
+- Completion of branch 0.300 (jean-francois@famillegratton.net)
+- Started ca.EditCACertificate() (jean-francois@famillegratton.net)
+- Added the capability to see the comments in the config file (jean-
+  francois@famillegratton.net)
+- Groundwork for branch 0.300 (jean-francois@famillegratton.net)
+- Updated ROADMAP, closing branch 0.200 (jean-francois@famillegratton.net)
+- Updated doc (jean-francois@famillegratton.net)
+- Updated DEB packaging doc (jean-francois@famillegratton.net)
+- Updated DEB packaging doc (jean-francois@famillegratton.net)
+- Updated repo info (jean-francois@famillegratton.net)
+- Prettifying the output, release bump (jean-francois@famillegratton.net)
+- Sample config file is more explicit (jean-francois@famillegratton.net)
+
 * Thu Apr 20 2023 builder <builder@famillegratton.net> 0.200-0
 - Updated doc (jean-francois@famillegratton.net)
 - Fixed KeyUsage issue, partial doc update (jean-francois@famillegratton.net)
