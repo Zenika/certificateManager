@@ -1,4 +1,4 @@
-Package: certificateManager
+Package: certificatemanager
 Version: 0.400-0
 Architecture: amd64
 Maintainer: J.F.Gratton <nexus@famillegratton.net>

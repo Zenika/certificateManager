@@ -1,6 +1,6 @@
 all: 
 	cd ../src
-	go build . -o ./certificateManager.exe
+	go build . -o ./cm.exe
 
 prepare:
 	sudo /opt/bin/install_golang.sh 1.19.8 amd64
@@ -8,5 +8,5 @@ prepare:
 
 install:
 	test -d $(DESTDIR)$(PREFIX)/bin || mkdir -p $(DESTDIR)$(PREFIX)/bin
-	install -pm 755 $(BUILDDIR)/certificateManager.exe $(DESTDIR)$(PREFIX)/bin/certificateManager
-	strip $(DESTDIR)$(PREFIX)/bin/certificateManager
+	install -pm 755 $(BUILDDIR)/cm.exe $(DESTDIR)$(PREFIX)/bin/cm
+	strip $(DESTDIR)$(PREFIX)/bin/cm

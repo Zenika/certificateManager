@@ -1,15 +1,16 @@
 %define debug_package   %{nil}
 %define _build_id_links none
-%define _name   certificateManager
+%define _name   certificatemanager
 %define _prefix /opt
 %define _version 0.400
 %define _rel 0
 %define _arch x86_64
+%define _binaryname cm
 
-Name:       certificateManager
+Name:       certificatemanager
 Version:    %{_version}
 Release:    %{_rel}
-Summary:    certificateManager
+Summary:    certificatemanager
 
 Group:      SSL
 License:    GPL2.0
@@ -30,8 +31,10 @@ RootCA and server SSL certificate manager
 
 %build
 cd %{_sourcedir}/%{_name}-%{_version}/src
-PATH=$PATH:/opt/go/bin go build -o %{_sourcedir}/%{_name} .
-strip %{_sourcedir}/%{_name}
+#PATH=$PATH:/opt/go/bin go build -o %{_sourcedir}/%{_name} .
+PATH=$PATH:/opt/go/bin go build -o %{_sourcedir}/%{_binaryname} .
+#strip %{_sourcedir}/%{_name}
+strip %{_sourcedir}/%{_binaryname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -41,8 +44,8 @@ exit 0
 
 %install
 #%{__mkdir_p} "$RPM_BUILD_ROOT%{_prefix}/bin"
-#install -Dpm 0755 %{buildroot}/%{_name} "$RPM_BUILD_ROOT%{_prefix}/bin/"
-install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{name}
+#install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{name}
+#install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{binaryname}
 
 %post
 
@@ -52,7 +55,8 @@ install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{name}
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/%{name}
+#%{_bindir}/%{name}
+%{_bindir}/%{binaryname}
 
 
 %changelog
