@@ -6,8 +6,8 @@
 | 0.400         | environment config management                     | *underway*                                                                                                                   |
 | 0.500         | `cert create`, `cert verify`, `cert edit`, `cert del` | will reuse most of the `ca` code                                                                                             |
 | 0.600         | create eco-system (subdirs) files                 | directories for such as private keys, crl, index, etc                                                                        |
-| 0.800         | portability                                       | replace all paths with '/' with filepath.Join()                                                                              |
-| 0.900         | major package refactoring                         | might or might not... this will most likely be the last branch before release                                                |
+| 0.700         | portability                                       | replace all paths with '/' with filepath.Join()                                                                              |
+| 0.800         | major package refactoring                         | might or might not... this will most likely be the last branch before release                                                |
 | 1.000         | release                                           |
 | 1.000+        | `ca install`, `ca revoke`                         |
 
