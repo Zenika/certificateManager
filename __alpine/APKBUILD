@@ -19,7 +19,7 @@ build() {
 	mkdir -p "$builddir" && cd "$builddir"/.. && rm -rf BUILD && cp -R "$startdir"/../src . && mv src BUILD
     cd "$builddir"
     make -f "$startdir"/Makefile prepare
-    go build -o "binaryname".exe .
+    CGO_ENABLED=0 go build -o "binaryname".exe .
 }
 
 package() {

@@ -1,6 +1,6 @@
 all: 
 	cd ../src
-	go build . -o ./cm.exe
+	CGO_ENABLED=0 go build . -o ./cm.exe
 
 prepare:
 	sudo /opt/bin/install_golang.sh 1.19.8 amd64
