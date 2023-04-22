@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PKGDIR=certificateManager`cat current_pkg_release`_amd64
+PKGDIR=certificateManager-`cat current_pkg_release`_amd64
 
 mkdir -p ${PKGDIR}/opt/bin ${PKGDIR}/DEBIAN
 mv control ${PKGDIR}/DEBIAN/
