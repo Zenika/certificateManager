@@ -88,30 +88,3 @@ func CreateRootCA(privateKeySize int) error {
 
 	return nil
 }
-
-//func CreateRootCA1(nBytes int) error {
-//	// Example usage
-//	config := &config.CertConfigStruct{
-//		IsCA:                 true,
-//		CommonName:           "Famille Gratton",
-//		Country:              "CA",
-//		Province:             "Quebec",
-//		Locality:             "Blainville",
-//		Organization:         "famillegratton.net",
-//		OrganizationalUnit:   "famillegratton",
-//		Duration:             10,
-//		DNSNames:             []string{"famillegratton.net", "nas.famillegratton.net", "lan.famillegratton.net"},
-//		IPAddresses:          []net.IP{net.ParseIP("10.1.1.11"), net.ParseIP("127.0.0.1")},
-//		CertificateDirectory: "/tmp",
-//		CertificateName:      "rootCA",
-//	}
-//
-//	err := createCACert(config)
-//	if err != nil {
-//		return err
-//	}
-//
-//	fmt.Printf("Certificate files %s/%s.crt and %s/%s.key were created.\n",
-//		config.CertificateDirectory, config.CertificateName, config.CertificateDirectory, config.CertificateName)
-//	return nil
-//}
