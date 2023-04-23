@@ -33,7 +33,21 @@ var configEditCmd = &cobra.Command{
 	},
 }
 
+var configTemplateCmd = &cobra.Command{
+	Use: "template",
+	//Aliases: []string{"update"},
+	Short: "Create a templagte (blank) file",
+	//Long:  `This is where you can create a templated file, edit/delete an existing config file, etc.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		err := config.TemplateConfigCreate()
+		if err != nil {
+			fmt.Println(err)
+		}
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(configCmd)
 	configCmd.AddCommand(configEditCmd)
+	configCmd.AddCommand(configTemplateCmd)
 }
