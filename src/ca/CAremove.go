@@ -5,7 +5,7 @@
 package ca
 
 import (
-	"certificateManager/config"
+	"cm/config"
 	"os"
 	"path/filepath"
 )

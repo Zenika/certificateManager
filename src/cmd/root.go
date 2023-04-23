@@ -4,8 +4,8 @@
 package cmd
 
 import (
-	"certificateManager/config"
-	"certificateManager/misc"
+	"cm/config"
+	"cm/misc"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -14,7 +14,7 @@ var version = "0.400 (2023.04.22)"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:     "certificateManager {ca|config|cert}",
+	Use:     "cm {ca|config|cert}",
 	Short:   "A rootCA and server certificates management tool",
 	Version: version,
 	Long:    `This tools allows you to manipulate your custom root CAs and all certificates signed against that rootCA.`,

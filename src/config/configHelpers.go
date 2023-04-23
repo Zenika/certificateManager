@@ -8,6 +8,7 @@ import (
 	"crypto/x509"
 	"encoding/json"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -23,8 +24,7 @@ func Json2Config() (CertConfigStruct, error) {
 	if !strings.HasSuffix(CertConfigFile, ".json") {
 		CertConfigFile += ".json"
 	}
-	rcDir, _ := os.UserHomeDir()
-	rcFile := rcDir + "/.config/certificateManager/" + CertConfigFile
+	rcFile := filepath.Join(os.Getenv("HOME"), ".config", "certificatemanager", CertConfigFile)
 	jFile, err := os.ReadFile(rcFile)
 	if err != nil {
 		return CertConfigStruct{}, err
@@ -35,6 +35,17 @@ func Json2Config() (CertConfigStruct, error) {
 	} else {
 		return payload, nil
 	}
+}
+
+func Config2Json(cfg CertConfigStruct) error {
+	jStream, err := json.MarshalIndent(cfg, "", "  ")
+	if err != nil {
+		return err
+	}
+	rcFile := filepath.Join(os.Getenv("HOME"), ".config", "certificatemanager", CertConfigFile)
+	err = os.WriteFile(rcFile, jStream, 0600)
+
+	return err
 }
 
 // GetKeyUsageFromStrings() : converts a slice of strings into

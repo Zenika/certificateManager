@@ -3,7 +3,7 @@
 */
 package main
 
-import "certificateManager/cmd"
+import "cm/cmd"
 
 func main() {
 	cmd.Execute()

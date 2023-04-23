@@ -4,9 +4,9 @@
 package cmd
 
 import (
-	"certificateManager/ca"
-	"certificateManager/config"
-	"certificateManager/misc"
+	"cm/ca"
+	"cm/config"
+	"cm/misc"
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"

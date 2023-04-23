@@ -4,6 +4,7 @@
 package cmd
 
 import (
+	"cm/config"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -19,6 +20,20 @@ var configCmd = &cobra.Command{
 	},
 }
 
+var configEditCmd = &cobra.Command{
+	Use:     "edit",
+	Aliases: []string{"update"},
+	Short:   "Edit a configuration file",
+	//Long:  `This is where you can create a templated file, edit/delete an existing config file, etc.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		err := config.EditConfig()
+		if err != nil {
+			fmt.Println(err)
+		}
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(configCmd)
+	configCmd.AddCommand(configEditCmd)
 }

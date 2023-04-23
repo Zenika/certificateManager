@@ -1,4 +1,4 @@
-module certificateManager
+module cm
 
 go 1.20
 

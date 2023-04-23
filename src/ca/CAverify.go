@@ -5,7 +5,7 @@
 package ca
 
 import (
-	"certificateManager/config"
+	"cm/config"
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"

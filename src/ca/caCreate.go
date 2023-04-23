@@ -1,7 +1,7 @@
 package ca
 
 import (
-	"certificateManager/config"
+	"cm/config"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
