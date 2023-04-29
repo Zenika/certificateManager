@@ -44,8 +44,6 @@ exit 0
 
 %install
 #%{__mkdir_p} "$RPM_BUILD_ROOT%{_prefix}/bin"
-#install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{name}
-#install -Dpm 0755 %{_sourcedir}/%{name} %{buildroot}%{_bindir}/%{binaryname}
 
 %post
 
@@ -55,7 +53,6 @@ exit 0
 
 %files
 %defattr(-,root,root,-)
-#%{_bindir}/%{name}
 %{_bindir}/%{binaryname}
 
 
