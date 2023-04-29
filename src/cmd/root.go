@@ -4,8 +4,7 @@
 package cmd
 
 import (
-	"cm/config"
-	"cm/misc"
+	"cm/helpers"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -25,7 +24,7 @@ var clCmd = &cobra.Command{
 	Aliases: []string{"cl"},
 	Short:   "Shows changelog",
 	Run: func(cmd *cobra.Command, args []string) {
-		misc.Changelog()
+		helpers.Changelog()
 	},
 }
 
@@ -39,5 +38,5 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(clCmd)
-	rootCmd.PersistentFlags().StringVarP(&config.CertConfigFile, "config", "c", "defaultCertConfig.json", "certificate configuration file.")
+	rootCmd.PersistentFlags().StringVarP(&helpers.CertConfigFile, "config", "c", "defaultCertConfig.json", "certificate configuration file.")
 }

@@ -5,14 +5,14 @@
 package ca
 
 import (
-	"cm/config"
+	"cm/helpers"
 	"os"
 	"path/filepath"
 )
 
 // This is a stub, really, before we get to the actual removal in branch 0.600
 func RemoveCACertificate() error {
-	cfg, err := config.Json2Config()
+	cfg, err := helpers.Json2Config()
 
 	if err != nil {
 		return err

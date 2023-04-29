@@ -2,7 +2,7 @@
 // src/misc/main.go
 // 4/16/23 21:35:03
 
-package misc
+package helpers
 
 import "fmt"
 
