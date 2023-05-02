@@ -43,7 +43,7 @@ func GetStringSliceFromPrompt(prompt string, valuesPointer *[]string) {
 
 	// If slice is empty, prompt for first element
 	if len(slice) == 0 {
-		fmt.Printf("%s [], ENTER to ignore: ", prompt)
+		fmt.Printf("%s\nSince there are no initial values, please enter one, or press ENTER to ignore: ", prompt)
 		scanner.Scan()
 		input := scanner.Text()
 		if input == "" {
@@ -53,6 +53,7 @@ func GetStringSliceFromPrompt(prompt string, valuesPointer *[]string) {
 	}
 
 	// Update existing elements
+	fmt.Println("Now that we have an initial value, you can add others:")
 	for i := range slice[1:] {
 		fmt.Println("A value of '' (empty string) means that we keep the current value")
 		fmt.Println("A value of '.' means an empty string")
@@ -71,16 +72,16 @@ func GetStringSliceFromPrompt(prompt string, valuesPointer *[]string) {
 		}
 	}
 
-	// Prompt for new elements
-	for {
-		fmt.Print("Enter value for new element: ")
-		scanner.Scan()
-		input := scanner.Text()
-		if input == "" {
-			return
-		}
-		slice = append(slice, input)
-	}
+	//// Prompt for new elements
+	//for {
+	//	fmt.Print("Enter value for new element: ")
+	//	scanner.Scan()
+	//	input := scanner.Text()
+	//	if input == "" {
+	//		return
+	//	}
+	//	slice = append(slice, input)
+	//}
 
 	*valuesPointer = slice
 }
