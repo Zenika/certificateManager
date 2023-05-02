@@ -4,6 +4,8 @@ ___
 - Environment (config) files management
 - Ultimate attempt to build a working APK. If it fails, Alpine packaging will be removed in the next branch
 
+- Bumped GO to 1.19.9 (Alpine), 1.20.4 (others)
+
 
 <H2>Previously scheduled for this branch</H2>
 - ...
