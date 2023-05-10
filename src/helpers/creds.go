@@ -31,8 +31,9 @@ func Json2Config() (CertConfigStruct, error) {
 	}
 }
 
-func Config2Json(cfg CertConfigStruct) error {
-	jStream, err := json.MarshalIndent(cfg, "", "  ")
+// func Config2Json(cfg CertConfigStruct) error {
+func (c CertConfigStruct) Config2Json() error {
+	jStream, err := json.MarshalIndent(c, "", "  ")
 	if err != nil {
 		return err
 	}
