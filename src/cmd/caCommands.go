@@ -4,9 +4,8 @@
 package cmd
 
 import (
-	"certificateManager/ca"
-	"certificateManager/config"
-	"certificateManager/misc"
+	"cm/ca"
+	"cm/helpers"
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
@@ -37,10 +36,10 @@ var caCreateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		err := ca.CreateRootCA(privKeySize)
 		if err != nil {
-			fmt.Printf("%s", misc.Red("Error while creating the root CA:"))
+			fmt.Printf("%s", helpers.Red("Error while creating the root CA:"))
 			fmt.Println(err)
 		} else {
-			fmt.Printf("A %v bits-keysize certificate %s has been created in %s\n", misc.Green(strconv.Itoa(privKeySize)), misc.Green(config.CertConfig.CertificateName), misc.Green(config.CertConfig.CertificateDirectory))
+			fmt.Printf("A %v bits-keysize certificate %s has been created in %s\n", helpers.Green(strconv.Itoa(privKeySize)), helpers.Green(helpers.CertConfig.CertificateName), helpers.Green(helpers.CertConfig.CertificateDirectory))
 			//fmt.Println("Certificate has been created.")
 		}
 	},

@@ -1,12 +1,13 @@
-// certificateManager
-// Écrit par J.F.Gratton (jean-francois@famillegratton.net)
-// configStructs.go, jfgratton : 2023-03-20
+// certificateManager : Écrit par Jean-François Gratton (jean-francois@famillegratton.net)
+// src/config/configHelpers.go
+// 4/16/23 13:52:19
 
-package config
+package helpers
 
-import (
-	"net"
-)
+import "net"
+
+var CertConfigFile = "defaultCertConfig.json"
+var EnvConfigFile = "defaultEnvConfig.json"
 
 type CertConfigStruct struct {
 	Country              string   `json:"Country"`
@@ -34,4 +35,3 @@ type EnvConfigStruct struct {
 }
 
 var CertConfig = CertConfigStruct{Duration: 1, KeyUsage: []string{"cert sign", "crl sign", "digital signature"}}
-var EnvConfig EnvConfigStruct

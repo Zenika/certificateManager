@@ -1,7 +1,7 @@
 package ca
 
 import (
-	"certificateManager/config"
+	"cm/helpers"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
@@ -33,29 +33,29 @@ func CreateRootCA(privateKeySize int) error {
 		return err
 	}
 
-	config.CertConfig, err = config.Json2Config()
+	helpers.CertConfig, err = helpers.Json2Config()
 	if err != nil {
 		return err
 	}
 	// We cannot allow a certificate to last 0yr, 0mt, 0d, so we set a default value of 1 year
-	if config.CertConfig.Duration == 0 {
-		config.CertConfig.Duration = 1
+	if helpers.CertConfig.Duration == 0 {
+		helpers.CertConfig.Duration = 1
 	}
 	// Create a new self-signed root certificate template
 	template := &x509.Certificate{
 		SerialNumber:          big.NewInt(1),
-		Subject:               pkix.Name{CommonName: config.CertConfig.CommonName, Locality: []string{config.CertConfig.Locality}, Country: []string{config.CertConfig.Country}, Organization: []string{config.CertConfig.Organization}, OrganizationalUnit: []string{config.CertConfig.OrganizationalUnit}, Province: []string{config.CertConfig.Province}},
+		Subject:               pkix.Name{CommonName: helpers.CertConfig.CommonName, Locality: []string{helpers.CertConfig.Locality}, Country: []string{helpers.CertConfig.Country}, Organization: []string{helpers.CertConfig.Organization}, OrganizationalUnit: []string{helpers.CertConfig.OrganizationalUnit}, Province: []string{helpers.CertConfig.Province}},
 		NotBefore:             time.Now(),
-		NotAfter:              time.Now().AddDate(config.CertConfig.Duration, 0, 0),
-		KeyUsage:              config.GetKeyUsageFromStrings(config.CertConfig.KeyUsage),
-		IsCA:                  config.CertConfig.IsCA,
+		NotAfter:              time.Now().AddDate(helpers.CertConfig.Duration, 0, 0),
+		KeyUsage:              helpers.GetKeyUsageFromStrings(helpers.CertConfig.KeyUsage),
+		IsCA:                  helpers.CertConfig.IsCA,
 		BasicConstraintsValid: true,
-		DNSNames:              config.CertConfig.DNSNames,
-		IPAddresses:           config.CertConfig.IPAddresses,
-		EmailAddresses:        config.CertConfig.EmailAddresses,
+		DNSNames:              helpers.CertConfig.DNSNames,
+		IPAddresses:           helpers.CertConfig.IPAddresses,
+		EmailAddresses:        helpers.CertConfig.EmailAddresses,
 	}
-	if config.CertConfig.IsCA {
-		template.KeyUsage = config.ReindexKeyUsage(config.CertConfig)
+	if helpers.CertConfig.IsCA {
+		template.KeyUsage = helpers.ReindexKeyUsage(helpers.CertConfig)
 	}
 	// Create the root certificate using the template and the private key
 	rootCertBytes, err := x509.CreateCertificate(rand.Reader, template, template, &privateKey.PublicKey, privateKey)
@@ -64,7 +64,7 @@ func CreateRootCA(privateKeySize int) error {
 	}
 
 	// Write the private key and root certificate to files
-	privateKeyFile, err := os.Create(filepath.Join(config.CertConfig.CertificateDirectory, config.CertConfig.CertificateName) + ".key")
+	privateKeyFile, err := os.Create(filepath.Join(helpers.CertConfig.CertificateDirectory, helpers.CertConfig.CertificateName) + ".key")
 	if err != nil {
 		return err
 	}
@@ -75,7 +75,7 @@ func CreateRootCA(privateKeySize int) error {
 		return err
 	}
 
-	rootCertFile, err := os.Create(filepath.Join(config.CertConfig.CertificateDirectory, config.CertConfig.CertificateName) + ".crt")
+	rootCertFile, err := os.Create(filepath.Join(helpers.CertConfig.CertificateDirectory, helpers.CertConfig.CertificateName) + ".crt")
 	if err != nil {
 		return err
 	}

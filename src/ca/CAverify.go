@@ -5,7 +5,7 @@
 package ca
 
 import (
-	"certificateManager/config"
+	"cm/helpers"
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
@@ -79,7 +79,7 @@ func VerifyCACertificate(certFilePath string) error {
 
 	if parsedCert.KeyUsage != 0 {
 		fmt.Printf("\n   x509v3 Key usage:\n")
-		ku := config.GetStringsFromKeyUsage(parsedCert.KeyUsage)
+		ku := helpers.GetStringsFromKeyUsage(parsedCert.KeyUsage)
 		for _, k := range ku {
 			fmt.Printf("\t• %s\n", k)
 		}
@@ -94,7 +94,7 @@ func VerifyCACertificate(certFilePath string) error {
 	}
 
 	if CaVerifyComments {
-		cfg, err := config.Json2Config()
+		cfg, err := helpers.Json2Config()
 		if err != nil {
 			return err
 		}

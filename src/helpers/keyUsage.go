@@ -1,41 +1,13 @@
 // certificateManager : Écrit par Jean-François Gratton (jean-francois@famillegratton.net)
-// src/config/configHelpers.go
-// 4/16/23 13:52:19
+// src/helpers/keyUsage.go
+// 4/29/23 17:01:24
 
-package config
+package helpers
 
 import (
 	"crypto/x509"
-	"encoding/json"
-	"os"
 	"strings"
 )
-
-var CertConfigFile = "defaultCertConfig.json"
-var EnvConfigFile = "defaultEnvConfig.json"
-
-//var ServerCertEnvironment = "serverCert-default.json"
-
-func Json2Config() (CertConfigStruct, error) {
-	var payload CertConfigStruct
-	var err error
-
-	if !strings.HasSuffix(CertConfigFile, ".json") {
-		CertConfigFile += ".json"
-	}
-	rcDir, _ := os.UserHomeDir()
-	rcFile := rcDir + "/.config/certificateManager/" + CertConfigFile
-	jFile, err := os.ReadFile(rcFile)
-	if err != nil {
-		return CertConfigStruct{}, err
-	}
-	err = json.Unmarshal(jFile, &payload)
-	if err != nil {
-		return CertConfigStruct{}, err
-	} else {
-		return payload, nil
-	}
-}
 
 // GetKeyUsageFromStrings() : converts a slice of strings into
 // A x509.KeyUsage value. We use slices of strings because x509.KeyUsage
@@ -102,8 +74,6 @@ func GetStringsFromKeyUsage(keyUsage x509.KeyUsage) []string {
 	}
 	return usages
 }
-
-// template.KeyUsage = x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature
 
 // ReindexKeyUsage() : Ensures that the CertConfigStruct.KeyUsage contains only unique values
 func ReindexKeyUsage(cfg CertConfigStruct) x509.KeyUsage {

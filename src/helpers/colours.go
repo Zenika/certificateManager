@@ -2,7 +2,7 @@
 // src/misc/colours.go
 // 2/7/23 09:15:32
 
-package misc
+package helpers
 
 import (
 	"fmt"

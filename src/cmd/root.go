@@ -4,17 +4,16 @@
 package cmd
 
 import (
-	"certificateManager/config"
-	"certificateManager/misc"
+	"cm/helpers"
 	"github.com/spf13/cobra"
 	"os"
 )
 
-var version = "0.300 (2023.04.20)"
+var version = "0.400 (2023.04.22)"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:     "certificateManager {ca|config|cert}",
+	Use:     "cm {ca|config|cert}",
 	Short:   "A rootCA and server certificates management tool",
 	Version: version,
 	Long:    `This tools allows you to manipulate your custom root CAs and all certificates signed against that rootCA.`,
@@ -25,7 +24,7 @@ var clCmd = &cobra.Command{
 	Aliases: []string{"cl"},
 	Short:   "Shows changelog",
 	Run: func(cmd *cobra.Command, args []string) {
-		misc.Changelog()
+		helpers.Changelog()
 	},
 }
 
@@ -39,5 +38,5 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(clCmd)
-	rootCmd.PersistentFlags().StringVarP(&config.CertConfigFile, "config", "c", "defaultCertConfig.json", "certificate configuration file.")
+	rootCmd.PersistentFlags().StringVarP(&helpers.CertConfigFile, "config", "c", "defaultCertConfig.json", "certificate configuration file.")
 }
