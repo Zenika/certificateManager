@@ -26,14 +26,11 @@ BuildRequires: gcc
 RootCA and server SSL certificate manager
 
 %prep
-#%setup -q
 %autosetup
 
 %build
 cd %{_sourcedir}/%{_name}-%{_version}/src
-#PATH=$PATH:/opt/go/bin go build -o %{_sourcedir}/%{_name} .
 PATH=$PATH:/opt/go/bin go build -o %{_sourcedir}/%{_binaryname} .
-#strip %{_sourcedir}/%{_name}
 strip %{_sourcedir}/%{_binaryname}
 
 %clean
@@ -43,7 +40,7 @@ rm -rf $RPM_BUILD_ROOT
 exit 0
 
 %install
-#%{__mkdir_p} "$RPM_BUILD_ROOT%{_prefix}/bin"
+install -Dpm 0755 %{_sourcedir}/%{_binaryname} %{buildroot}%{_bindir}/%{_binaryname}
 
 %post
 
@@ -53,7 +50,7 @@ exit 0
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/%{binaryname}
+%{_bindir}/%{_binaryname}
 
 
 %changelog
