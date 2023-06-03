@@ -53,13 +53,12 @@ exit 0
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/%{binaryname}
+%{_bindir}/%{_binaryname}
 
 
 %changelog
 * Sat Jun 03 2023 builder <builder@famillegratton.net> 0.400-0
-
-* Sat Jun 03 2023 builder <builder@famillegratton.net> 0.400-0
+- Completed feature release 0.400
 
 * Sat Apr 22 2023 builder <builder@famillegratton.net> 0.300-0
 - Completion of branch 0.300 (jean-francois@famillegratton.net)
