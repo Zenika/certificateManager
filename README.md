@@ -10,6 +10,10 @@ With this tool you will be able to:
 
 - create the configuration files needed for the above tasks
 
+**IMPORTANT NOTE**<br>
+The ROADMAP.md file explains when each planned feature will be added to the develop branch.<br>
+Currently branch 0.400 is being written at, while the latest branch to be merged in develop is 0.300.<br>
+
 <H2>Installing from source</H2>
 <H3>Pre-requisites:</H3>
 You need the following packages and tools:<br>
