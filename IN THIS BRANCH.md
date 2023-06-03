@@ -1,11 +1,11 @@
 <H1>Branch: 0.400</H1>
 ___
 <H2>What will be in this branch</H2>
-- Environment (config) files management
-- Ultimate attempt to build a working APK. If it fails, Alpine packaging will be removed in the next branch
 
+- Environment (config) files management<br>
+- Ultimate attempt to build a working APK. If it fails, Alpine packaging will be removed in the next branch
 - Bumped GO to 1.20.4
 
 
 <H2>Previously scheduled for this branch</H2>
-- ...
+- `config edit` : no longer in my plans
