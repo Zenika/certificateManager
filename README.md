@@ -6,16 +6,20 @@ With this tool you will be able to:
 - manage both root CA and server certificates
   - Create new root CA
   - Remove (revoke) old server certs
-  - Creste new server certs against the rootCA
+  - Create new server certs against the rootCA
 
 - create the configuration files needed for the above tasks
+
+**IMPORTANT NOTE**<br>
+The ROADMAP.md file explains when each planned feature will be added to the develop branch.<br>
+The latest branch merged in develop is the one listed in the file `IN THIS BRANCH.md` . Branch names correspond to the feature set just developped.
 
 <H2>Installing from source</H2>
 <H3>Pre-requisites:</H3>
 You need the following packages and tools:<br>
 - gcc<br>
 - make<br>
-- go : check the `go.version` file to see which version to install; as of writing this, v1.20.3 was the current version.<br>
+- go : check the `go.version` file to see which version to install; as of writing this, v1.20.4 was the current version.<br>
 
 <H3>Building:</H3>
 A helper script is available in the `src/` directory.<br>
@@ -53,7 +57,7 @@ cd /root
 apt install -y gnupg
 wget --no-check-certificate https://nginx.famillegratton.net:9443/gpg/nexus-public.gpg.key /root/nexus.key
 apt-key add /root/nexus.key
-rm /root/nexus.key`
+rm /root/nexus.key
 ```
 <br><br>
 Refresh your repo lists (`dnf clean all && dnf makecache`, `apt-get update`, `zypper ref`), and then use your usual tool to download and install

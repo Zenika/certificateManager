@@ -11,7 +11,7 @@ import (
 	"os"
 )
 
-func EditConfig() error {
+func CreateConfig() error {
 	var err error
 	helpers.CertConfig, err = helpers.Json2Config()
 	if err != nil {

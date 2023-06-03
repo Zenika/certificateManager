@@ -1,5 +1,5 @@
 // certificateManager : Écrit par Jean-François Gratton (jean-francois@famillegratton.net)
-// src/helpers/edit.go
+// src/helpers/configCreateHelpers.go
 // 4/29/23 17:36:16
 
 package helpers
@@ -41,48 +41,20 @@ func GetStringSliceFromPrompt(prompt string, valuesPointer *[]string) {
 	slice := *valuesPointer
 	scanner := bufio.NewScanner(os.Stdin)
 
-	// If slice is empty, prompt for first element
-	if len(slice) == 0 {
-		fmt.Printf("%s\nSince there are no initial values, please enter one, or press ENTER to ignore: ", prompt)
+	fmt.Printf("%s\n", prompt)
+	for i := range slice {
+		fmt.Println("A value of '' is an empty string to be inserted in the slice (array)")
+		fmt.Println("A value of '.' means that we're done and may exit the current loop")
 		scanner.Scan()
 		input := scanner.Text()
 		if input == "" {
-			return
-		}
-		slice = append(slice, input)
-	}
-
-	// Update existing elements
-	fmt.Println("Now that we have an initial value, you can add others:")
-	for i := range slice[1:] {
-		fmt.Println("A value of '' (empty string) means that we keep the current value")
-		fmt.Println("A value of '.' means an empty string")
-		fmt.Printf("A value of '.. ' means that we exit of this loop. %s [%s]: ", prompt, slice[i])
-		scanner.Scan()
-		input := scanner.Text()
-		if input == "" {
-			continue
-		}
-		if input == "." {
 			slice[i] = ""
 		}
-		if input == ".." {
+		if input == "." {
 			*valuesPointer = slice
 			return
 		}
 	}
-
-	//// Prompt for new elements
-	//for {
-	//	fmt.Print("Enter value for new element: ")
-	//	scanner.Scan()
-	//	input := scanner.Text()
-	//	if input == "" {
-	//		return
-	//	}
-	//	slice = append(slice, input)
-	//}
-
 	*valuesPointer = slice
 }
 
@@ -102,7 +74,7 @@ func GetKeyUsageFromPrompt() []string {
 	fmt.Println()
 	for {
 		input := ""
-		fmt.Print("Please enter a value from the above, just press ENTER to end : ")
+		fmt.Print("Please enter a value from the above list, just press ENTER to end : ")
 		inputScanner.Scan()
 		input = inputScanner.Text()
 		if input == "" {
