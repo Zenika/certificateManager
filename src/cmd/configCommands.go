@@ -20,13 +20,13 @@ var configCmd = &cobra.Command{
 	},
 }
 
-var configEditCmd = &cobra.Command{
-	Use:     "edit",
-	Aliases: []string{"update"},
-	Short:   "Edit a configuration file",
+var configCreateCmd = &cobra.Command{
+	Use:     "create",
+	Aliases: []string{"generate"},
+	Short:   "Generate a configuration file",
 	//Long:  `This is where you can create a templated file, edit/delete an existing config file, etc.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		err := config.EditConfig()
+		err := config.CreateConfig()
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -36,18 +36,21 @@ var configEditCmd = &cobra.Command{
 var configTemplateCmd = &cobra.Command{
 	Use: "template",
 	//Aliases: []string{"update"},
-	Short: "Create a templagte (blank) file",
-	//Long:  `This is where you can create a templated file, edit/delete an existing config file, etc.`,
+	Short: "Create a template (blank) file",
+	Long: `This is where you (re)create a templated file in case that the original has been deleted.
+
+That file will be created in your home directory, under the .config/certificatemanager directory,
+alongside with an explicative text file`,
 	Run: func(cmd *cobra.Command, args []string) {
-		//err := config.TemplateConfigCreate()
-		//if err != nil {
-		//	fmt.Println(err)
-		//}
+		err := config.TemplateConfigCreate()
+		if err != nil {
+			fmt.Println(err)
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(configCmd)
-	configCmd.AddCommand(configEditCmd)
-	//configCmd.AddCommand(configTemplateCmd)
+	configCmd.AddCommand(configCreateCmd)
+	configCmd.AddCommand(configTemplateCmd)
 }

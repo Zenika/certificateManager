@@ -9,8 +9,7 @@
 | 0.700         | create eco-system (subdirs) files                     | directories for such as private keys, crl, index, etc                                                                        |
 | 0.800         | portability                                           | replace all paths with '/' with filepath.Join()                                                                              |
 | 0.900         | major package refactoring                             | might or might not... this will most likely be the last branch before release                                                |
+| 0.990         | localization of strings in French                     | unsure yet if I'll go that way                                                                                               |
 | 1.000         | release                                               |
 | 1.000+        | `ca install`, `ca revoke`                             |
-
-
 

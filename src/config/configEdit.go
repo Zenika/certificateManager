@@ -26,7 +26,7 @@ func EditConfig() error {
 	}
 
 	// we now need to reinject the config in a json
-	err = helpers.CertConfig.Config2Json()
+	err = helpers.CertConfig.Config2Json(helpers.CertConfigFile)
 	if err != nil {
 		return err
 	}
