@@ -59,6 +59,8 @@ exit 0
 %changelog
 * Sat Jun 03 2023 builder <builder@famillegratton.net> 0.400-0
 
+* Sat Jun 03 2023 builder <builder@famillegratton.net> 0.400-0
+
 * Sat Apr 22 2023 builder <builder@famillegratton.net> 0.300-0
 - Completion of branch 0.300 (jean-francois@famillegratton.net)
 - Started ca.EditCACertificate() (jean-francois@famillegratton.net)
