@@ -1,11 +1,12 @@
-<H1>Branch: 0.400</H1>
+<H1>Branch: 0.500</H1>
 ___
 <H2>What will be in this branch</H2>
 
-- Environment (config) files management<br>
-- Ultimate attempt to build a working APK. If it fails, Alpine packaging will be removed in the next branch
-- Bumped GO to 1.20.4
+-  `cert create`
+- `cert verify`
+- `cert del`
 
+Most of the code in this branch will be using code from the `ca` subcommand
 
 <H2>Previously scheduled for this branch</H2>
-- `config edit` : no longer in my plans
+- `cert edit` : no longer in my plans
